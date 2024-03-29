@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "connect-redis": "^7.1.1",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "express-handlebars-paginate": "^1.0.3",
@@ -17,9 +18,9 @@
     "express-validator": "^7.0.1",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
+    "redis": "^4.6.13",
     "sequelize": "^6.37.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NgLamKha/ptudw-22880066.git"
