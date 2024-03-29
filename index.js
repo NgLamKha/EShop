@@ -10,8 +10,8 @@ const session = require('express-session');
 const redisStore = require('connect-redis').default;
 const {createClient} = require('redis');
 const redisClient = createClient({
-    //url: 'rediss://red-co3cigg21fec738v6bvg:cA3TvTOYHDYuxWqG80RgvtfDXvrJw7E6@oregon-redis.render.com:6379'
-    url: 'redis://red-co3cigg21fec738v6bvg:6379'
+    //url: 'rediss://red-co3d81821fec738vipa0:NmrvNMCUTs4QxvFzzUwy4OUoiKxThz8V@singapore-redis.render.com:6379'
+    url: 'redis://red-co3d81821fec738vipa0:6379'
 });
 redisClient.connect().catch(console.error);
 
