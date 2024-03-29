@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const port = process.env.port || 5000;
@@ -10,8 +12,7 @@ const session = require('express-session');
 const redisStore = require('connect-redis').default;
 const {createClient} = require('redis');
 const redisClient = createClient({
-    //url: 'rediss://red-co3d81821fec738vipa0:NmrvNMCUTs4QxvFzzUwy4OUoiKxThz8V@singapore-redis.render.com:6379'
-    url: 'redis://red-co3d81821fec738vipa0:6379'
+    url: process.env.REDIS_URL
 });
 redisClient.connect().catch(console.error);
 
@@ -41,7 +42,7 @@ app.use(express.urlencoded({extended: false}));
 
 // cau hinh su dung session
 app.use(session({
-    secret: 'S3cret',
+    secret: process.env.SESSION_SECRET,
     store: new redisStore({client: redisClient}),
     resave: false,
     saveUninitialized: false,
