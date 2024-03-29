@@ -1,4 +1,4 @@
-'use strick';
+'use strict';
 
 const express = require('express');
 const app = express();
@@ -7,7 +7,6 @@ const expressHandlebars = require('express-handlebars');
 const {createStarList} = require('./controllers/handlebarsHelper');
 const {createPagination} = require('express-handlebars-paginate');
 const session = require('express-session');
-const Cart = require('./controllers/cart');
 const redisStore = require('connect-redis').default;
 const {createClient} = require('redis');
 const redisClient = createClient({
@@ -54,7 +53,7 @@ app.use(session({
 
 // middleware khoi tao gio hang
 app.use((req, res, next) => {
-    let cart = require('./controllers/cart');
+    let Cart = require('./controllers/cart');
     req.session.cart = new Cart(req.session.cart ? req.session.cart : {});
     res.locals.quantity = req.session.cart.quantity;
     next();
