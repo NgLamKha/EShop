@@ -15,6 +15,8 @@ const redisClient = createClient({
     url: process.env.REDIS_URL
 });
 redisClient.connect().catch(console.error);
+const passport = require('./controllers/passport');
+const flash = require('connect-flash');
 
 
 // Cau hinh public static folder
@@ -52,17 +54,26 @@ app.use(session({
     }
 }));
 
+// cau hinh su dung passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// cau hinh su dung connect-flash
+app.use(flash());
+
 // middleware khoi tao gio hang
 app.use((req, res, next) => {
     let Cart = require('./controllers/cart');
     req.session.cart = new Cart(req.session.cart ? req.session.cart : {});
     res.locals.quantity = req.session.cart.quantity;
+    res.locals.isLoggedIn = req.isAuthenticated();
     next();
 });
 
 // routes
 app.use('/', require('./routes/indexRouter'));
 app.use('/products', require('./routes/productsRouter'));
+app.use('/users', require('./routes/authRouter'));
 app.use('/users', require('./routes/usersRouter'));
 
 // errors
