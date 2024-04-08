@@ -3,7 +3,6 @@
 const controller = {};
 const passport = require('./passport');
 const models = require('../models');
-const { Model } = require('sequelize');
 
 controller.show = (req, res) => {
     if(req.isAuthenticated()) {
@@ -108,7 +107,7 @@ controller.resetPassword = async (req, res) => {
     let bcypt = require('bcrypt');
     let password = bcypt.hashSync(req.body.password, bcypt.genSaltSync(8));
 
-    await models.User.update({passport}, {where: {email}});
+    await models.User.update({password}, {where: {email}});
     res.render('reset-password', {done: true});
 };
 
